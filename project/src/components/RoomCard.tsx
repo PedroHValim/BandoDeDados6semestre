@@ -1,0 +1,80 @@
+import '../styles/RoomCard.css'
+
+interface Room {
+  numero: string
+  tipo: string
+  descricao: string
+  comodidades: string[]
+  preco_diaria: number
+  disponibilidade: 'livre' | 'ocupado' | 'manutencao'
+}
+
+interface RoomCardProps {
+  room: Room
+}
+
+function RoomCard({ room }: RoomCardProps) {
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'livre': return 'Livre'
+      case 'ocupado': return 'Ocupado'
+      case 'manutencao': return 'Em Manutenção'
+      default: return status
+    }
+  }
+
+  return (
+    <div className={`room-card ${room.disponibilidade}`}>
+      <div className="room-image">
+        <img
+          src={`https://images.pexels.com/photos/${room.tipo === 'Suite Master' ? '271624' : room.tipo === 'Suite' ? '271618' : room.tipo === 'Deluxe' ? '164595' : '271619'}/pexels-photo.jpeg?auto=compress&cs=tinysrgb&w=400`}
+          alt={`Quarto ${room.numero}`}
+        />
+        <div className={`status-badge ${room.disponibilidade}`}>
+          {getStatusText(room.disponibilidade)}
+        </div>
+      </div>
+
+      <div className="room-content">
+        <div className="room-header">
+          <h3>Quarto {room.numero}</h3>
+          <span className="room-type">{room.tipo}</span>
+        </div>
+
+        <p className="room-description">{room.descricao}</p>
+
+        <div className="room-amenities">
+          <h4>Comodidades:</h4>
+          <div className="amenities-list">
+            {room.comodidades.map((comodidade, index) => (
+              <span key={index} className="amenity-tag">
+                {comodidade}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="room-footer">
+          <div className="price">
+            <span className="price-label">Diária</span>
+            <span className="price-value">
+              R$ {room.preco_diaria.toFixed(2)}
+            </span>
+          </div>
+          <button
+            className="reserve-button"
+            disabled={room.disponibilidade !== 'livre'}
+          >
+            {room.disponibilidade === 'livre' ? 'Reservar' : 'Indisponível'}
+          </button>
+        </div>
+      </div>
+
+      <div className="cassandra-indicator">
+        <span>Status em tempo real - Cassandra</span>
+      </div>
+    </div>
+  )
+}
+
+export default RoomCard

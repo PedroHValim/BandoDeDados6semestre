@@ -1,0 +1,219 @@
+.room-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.room-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.room-card.livre {
+  border: 2px solid #10b981;
+}
+
+.room-card.ocupado {
+  border: 2px solid #ef4444;
+}
+
+.room-card.manutencao {
+  border: 2px solid #f59e0b;
+}
+
+.room-image {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.room-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.room-card:hover .room-image img {
+  transform: scale(1.1);
+}
+
+.status-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status-badge.livre {
+  background: #10b981;
+  color: white;
+}
+
+.status-badge.ocupado {
+  background: #ef4444;
+  color: white;
+}
+
+.status-badge.manutencao {
+  background: #f59e0b;
+  color: white;
+}
+
+.room-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.room-header h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 120%;
+}
+
+.room-type {
+  padding: 6px 12px;
+  background: #f0f9ff;
+  color: #1e40af;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.room-description {
+  font-size: 15px;
+  color: #666;
+  line-height: 150%;
+}
+
+.room-amenities h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.amenities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.amenity-tag {
+  padding: 6px 12px;
+  background: #f5f7fa;
+  color: #4b5563;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.room-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: auto;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.price-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.price-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 120%;
+}
+
+.reserve-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reserve-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+.reserve-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.reserve-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cassandra-indicator {
+  padding: 8px 16px;
+  background: #fef3c7;
+  border-top: 1px solid #fde68a;
+  text-align: center;
+}
+
+.cassandra-indicator span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #92400e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 640px) {
+  .room-header {
+    flex-direction: column;
+  }
+
+  .room-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .reserve-button {
+    width: 100%;
+  }
+}
