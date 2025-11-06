@@ -1,4 +1,5 @@
 import '../styles/RoomCard.css'
+;
 
 interface Room {
   numero: string
@@ -64,8 +65,39 @@ function RoomCard({ room }: RoomCardProps) {
           <button
             className="reserve-button"
             disabled={room.disponibilidade !== 'livre'}
+            onClick={() => {
+            fetch("http://localhost:3000/atualizar-status", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    numero_quarto: Number(room.numero),
+                    status: "ocupado"
+                })
+            })
+            .then(response => {
+                if (!response.ok) { 
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.mensagem || `Erro do servidor: ${response.status}`);
+                    }).catch(() => {
+                        throw new Error(`Erro de rede ou do servidor: Status ${response.status}`);
+                    });
+                }
+                return response.json(); 
+            })
+            .then(data => {
+                console.log("Status atualizado com sucesso:", data);
+                alert(`Status atualizado com sucesso! Mensagem do servidor: ${data.mensagem}`);
+            })
+            .catch(error => {
+                console.error("Erro ao atualizar status:", error);
+                alert("Erro ao atualizar o status do quarto! Detalhe: " + error.message);
+            });
+        }}
           >
             {room.disponibilidade === 'livre' ? 'Reservar' : 'Indisponível'}
+            
           </button>
         </div>
       </div>

@@ -30,22 +30,30 @@ function RoomsPage({ onLogout }: RoomsPageProps) {
 
   useEffect(() => {
 
-    // ✅ Buscar quartos do backend
+    // ✅ Buscar quartos do backend (Mongo + Cassandra)
     fetch("http://localhost:3000/quartos")
       .then(res => res.json())
       .then(data => {
-        const convertedRooms: Room[] = data.map((room: any) => ({
-          numero: String(room.numero),
-          tipo: room.tipo ?? "Standard",
-          descricao: room.descricao,
-          comodidades: room.comodidades.split(",").map((c: string) => c.trim()),
-          preco_diaria: room.preco_diaria,
-          disponibilidade: room.disponibilidade.toLowerCase() as Room['disponibilidade']
-        }))
+        const convertedRooms: Room[] = data.map((room: any) => {
+          // Garante que 'disponibilidade' seja uma string válida
+          const disponibilidade = (room.disponibilidade || "indisponível").toLowerCase();
 
-        setRooms(convertedRooms)
+          return {
+            numero: String(room.numero),
+            tipo: room.tipo ?? "Standard",
+            descricao: room.descricao,
+            comodidades: typeof room.comodidades === "string"
+              ? room.comodidades.split(",").map((c: string) => c.trim())
+              : room.comodidades, // Caso já venha como array
+            preco_diaria: room.preco_diaria,
+            disponibilidade: disponibilidade as Room["disponibilidade"]
+          };
+        });
+
+        setRooms(convertedRooms);
       })
-      .catch(error => console.error("Erro ao carregar quartos:", error))
+      .catch(error => console.error("Erro ao carregar quartos:", error));
+
 
     // ✅ Serviços ainda mockados
     const mockServices: Service[] = [
