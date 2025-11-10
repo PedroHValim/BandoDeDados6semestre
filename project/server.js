@@ -59,6 +59,9 @@ connectDB();
 app.post('/inserirQuarto', async (req, res) => {
   try {
     const novoQuarto = await Quartos.create(req.body);
+    const numero = novoQuarto.numero;
+    const status = novoQuarto.disponibilidade || 'livre';
+    await adicionarStatus(numero, status);
     res.json(novoQuarto);
   } catch (error) {
     console.error('❌ Erro ao inserir quarto:', error);
@@ -88,6 +91,36 @@ app.delete("/excluirQuarto/:numero", async (req, res) => {
   } catch (err) {
     console.error("❌ Erro ao excluir quarto:", err);
     res.status(500).json({ erro: "Erro ao excluir quarto" });
+  }
+});
+
+app.put("/atualizarQuarto", async (req, res) => {
+  try {
+    const { numero, descricao, comodidades, preco_diaria, disponibilidade } = req.body;
+
+    // 🔹 Busca o quarto atual no MongoDB
+    const quartoExistente = await Quartos.findOne({ numero });
+    if (!quartoExistente) {
+      return res.status(404).json({ erro: "Quarto não encontrado" });
+    }
+
+    // 🔹 Atualiza apenas os campos enviados (sem sobrescrever os que vierem vazios)
+    if (descricao) quartoExistente.descricao = descricao;
+    if (comodidades) quartoExistente.comodidades = comodidades;
+    if (preco_diaria) quartoExistente.preco_diaria = preco_diaria;
+    if (disponibilidade) quartoExistente.disponibilidade = disponibilidade;
+
+    await quartoExistente.save();
+
+    // 🔹 Se enviou disponibilidade, atualiza também no Cassandra
+    if (disponibilidade) {
+      await atualizarStatus(numero, disponibilidade);
+    }
+
+    res.json({ mensagem: "✅ Quarto atualizado com sucesso!", quarto: quartoExistente });
+  } catch (error) {
+    console.error("❌ Erro ao atualizar quarto:", error);
+    res.status(500).json({ erro: "Erro ao atualizar quarto" });
   }
 });
 
@@ -190,6 +223,7 @@ async function atualizarStatus(numero_quarto, status) {
   }
 }
 
+
 // Rota para atualizar status
 app.post('/atualizar-status', async (req, res) => {
   const { numero_quarto, status } = req.body;
@@ -223,6 +257,8 @@ async function adicionarStatus(numero_quarto, status) {
   }
 }
 
+adicionarStatus(320,"livre");
+
 // Excluir status de um quarto
 async function excluirStatus(numero_quarto) {
   try {
@@ -236,6 +272,7 @@ async function excluirStatus(numero_quarto) {
     console.error('❌ Erro ao excluir status:', err);
   }
 }
+
 
 // ===============================
 // 🔹 Inicialização do servidor

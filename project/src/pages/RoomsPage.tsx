@@ -28,15 +28,17 @@ function RoomsPage({ onLogout }: RoomsPageProps) {
   const [services, setServices] = useState<Service[]>([])
   const [activeTab, setActiveTab] = useState<'rooms' | 'services'>('rooms')
 
+
   // Estados para o modal de adicionar quarto
-  const [mostrarModal, setMostrarModal] = useState(false)
-  const [formData, setFormData] = useState({
-    numero: '',
-    descricao: '',
-    comodidades: '',
-    preco_diaria: '',
-    disponibilidade: ''
-  })
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [modoEdicao, setModoEdicao] = useState(false);
+    const [formData, setFormData] = useState({
+      numero: '',
+      descricao: '',
+      comodidades: '',
+      preco_diaria: '',
+      disponibilidade: ''
+    });
 
   useEffect(() => {
     // ✅ Buscar quartos do backend (Mongo + Cassandra)
@@ -117,6 +119,26 @@ function RoomsPage({ onLogout }: RoomsPageProps) {
     }
   }
 
+  const handleAtualizarQuarto = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/atualizarQuarto", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert("✅ Quarto atualizado com sucesso!");
+        setMostrarModal(false);
+      } else {
+        alert("❌ Erro ao atualizar quarto.");
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar quarto:", error);
+    }
+  };
+
+
   return (
     <div className="rooms-page">
       <header className="rooms-header">
@@ -176,6 +198,16 @@ function RoomsPage({ onLogout }: RoomsPageProps) {
               >
                 Excluir Quarto
               </button>
+              <button
+                onClick={() => {
+                  setModoEdicao(true);
+                  setMostrarModal(true);
+                }}
+                className="update-button"
+              >
+                Atualizar Quarto
+              </button>
+
             </div>
 
             <p className="section-description">
@@ -262,10 +294,26 @@ function RoomsPage({ onLogout }: RoomsPageProps) {
               onChange={handleChange}
             />
 
-            <div className="modal-buttons">
-              <button onClick={handleAdicionarQuarto} className="confirm-button">Adicionar</button>
-              <button onClick={() => setMostrarModal(false)} className="cancel-button">Cancelar</button>
-            </div>
+              <div className="modal-buttons">
+                {modoEdicao ? (
+                  <button onClick={handleAtualizarQuarto} className="confirm-button">
+                    Atualizar
+                  </button>
+                ) : (
+                  <button onClick={handleAdicionarQuarto} className="confirm-button">
+                    Adicionar
+                  </button>
+                )}
+                <button
+                  onClick={() => {
+                    setMostrarModal(false);
+                    setModoEdicao(false);
+                  }}
+                  className="cancel-button"
+                >
+                  Cancelar
+                </button>
+              </div>
           </div>
         </div>
       )}
