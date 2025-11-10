@@ -1,19 +1,19 @@
 .service-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 16px; /* Coerência com RoomCard */
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Coerência com RoomCard */
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  border: 2px solid transparent;
+  border: 1px solid #e5e7eb; /* Borda sutil */
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  border-color: #2563eb;
+  transform: translateY(-5px); /* Coerência com RoomCard */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Coerência com RoomCard */
+  border-color: #4f46e5; /* Nova cor primária */
 }
 
 .service-header {
@@ -24,29 +24,29 @@
 }
 
 .service-header h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-size: 22px; /* Um pouco maior */
+  font-weight: 800; /* Mais forte */
+  color: #111827; /* Cor mais escura */
   line-height: 120%;
 }
 
 .included-badge {
   padding: 6px 12px;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: #10b981; /* Cor sólida para simplicidade */
   color: white;
-  border-radius: 6px;
+  border-radius: 9999px; /* Pill shape */
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  box-shadow: none; /* Remover sombra */
 }
 
 .service-description {
   font-size: 15px;
-  color: #666;
-  line-height: 150%;
+  color: #4b5563; /* Cor de texto mais legível */
+  line-height: 160%;
   flex: 1;
 }
 
@@ -71,9 +71,9 @@
 }
 
 .price-value {
-  font-size: 22px;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-size: 24px; /* Preço maior */
+  font-weight: 800;
+  color: #111827;
   line-height: 120%;
 }
 
@@ -85,24 +85,27 @@
 }
 
 .service-button {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  padding: 12px 24px; /* Botão maior */
+  background: linear-gradient(135deg, #4f46e5, #6366f1); /* Novo gradiente primário */
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 10px; /* Borda mais arredondada */
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
 }
 
 .service-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
 }
 
 .service-button:active {
   transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
 }
 
 @media (max-width: 640px) {

@@ -26,15 +26,9 @@ function RoomCard({ room }: RoomCardProps) {
 
   return (
     <div className={`room-card ${room.disponibilidade}`}>
-      <div className="room-image">
-        <img
-          src={`https://images.pexels.com/photos/${room.tipo === 'Suite Master' ? '271624' : room.tipo === 'Suite' ? '271618' : room.tipo === 'Deluxe' ? '164595' : '271619'}/pexels-photo.jpeg?auto=compress&cs=tinysrgb&w=400`}
-          alt={`Quarto ${room.numero}`}
-        />
-        <div className={`status-badge ${room.disponibilidade}`}>
+      <div className={`status-badge ${room.disponibilidade}`}>
           {getStatusText(room.disponibilidade)}
         </div>
-      </div>
 
       <div className="room-content">
         <div className="room-header">

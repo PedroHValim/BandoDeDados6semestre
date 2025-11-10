@@ -257,8 +257,6 @@ async function adicionarStatus(numero_quarto, status) {
   }
 }
 
-adicionarStatus(320,"livre");
-
 // Excluir status de um quarto
 async function excluirStatus(numero_quarto) {
   try {

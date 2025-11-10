@@ -30,8 +30,8 @@
 
 .login-card {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 20px; /* Borda mais arredondada */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Sombra mais moderna */
   width: 100%;
   max-width: 480px;
   padding: 48px;
@@ -55,9 +55,9 @@
 }
 
 .login-header h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-size: 36px; /* Título maior */
+  font-weight: 800;
+  color: #111827; /* Cor mais escura */
   margin-bottom: 8px;
   line-height: 120%;
 }
@@ -96,8 +96,8 @@
 
 .tab.active {
   background: white;
-  color: #2563eb;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #4f46e5; /* Nova cor primária */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .login-form {
@@ -128,8 +128,8 @@
 }
 
 .form-group input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: #4f46e5; /* Nova cor primária */
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2); /* Sombra mais suave */
 }
 
 .form-group input::placeholder {
@@ -138,24 +138,27 @@
 
 .submit-button {
   margin-top: 8px;
-  padding: 14px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  padding: 16px; /* Botão um pouco maior */
+  background: linear-gradient(135deg, #4f46e5, #6366f1); /* Novo gradiente primário */
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 12px; /* Borda mais arredondada */
+  font-size: 18px; /* Fonte maior */
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
 }
 
 .submit-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
 }
 
 .submit-button:active {
   transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
 }
 
 .database-info {
@@ -172,8 +175,8 @@
 }
 
 .database-tables {
-  font-weight: 600;
-  color: #2563eb;
+  font-weight: 700;
+  color: #4f46e5; /* Nova cor primária */
 }
 
 @media (max-width: 640px) {

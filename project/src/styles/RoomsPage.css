@@ -4,10 +4,10 @@
 }
 
 .rooms-header {
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  background: linear-gradient(135deg, #4f46e5, #6366f1); /* Gradiente mais moderno */
   color: white;
-  padding: 24px 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 32px 0; /* Mais padding */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 .header-content {
@@ -20,33 +20,34 @@
 }
 
 .rooms-header h1 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 36px; /* Título maior */
+  font-weight: 800;
   line-height: 120%;
 }
 
 .logout-button {
-  padding: 10px 24px;
-  background: rgba(255, 255, 255, 0.2);
+  padding: 12px 28px; /* Botão maior */
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   border: 2px solid white;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .logout-button:hover {
   background: white;
-  color: #2563eb;
+  color: #4f46e5; /* Cor do hover para combinar com o novo gradiente */
   transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .rooms-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 60px 24px; /* Mais espaço no topo e rodapé */
 }
 
 .tabs-container {
@@ -74,8 +75,8 @@
 }
 
 .tab-button.active {
-  color: #2563eb;
-  border-bottom-color: #2563eb;
+  color: #4f46e5; /* Cor de tab ativa para combinar com o novo gradiente */
+  border-bottom-color: #4f46e5;
 }
 
 .content-section {
@@ -101,9 +102,9 @@
 }
 
 .section-header h2 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
   line-height: 120%;
 }
 
@@ -162,23 +163,23 @@
 
 .status-indicator.disponivel {
   background: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.3); /* Sombra maior */
 }
 
 .status-indicator.ocupado {
   background: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.3); /* Sombra maior */
 }
 
 .status-indicator.manutencao {
   background: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.3); /* Sombra maior */
 }
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Min-width um pouco menor para melhor responsividade */
+  gap: 32px; /* Aumentar o espaçamento entre os cards */
 }
 
 .add-room-button {
