@@ -88,6 +88,56 @@ Conexão com os Serviços (S1 e S2):
 - Mongo para dados flexíveis que mudam bastante.
 - Cassandra para dados em tempo real e histórico de ocupação.
 
+### ***CRIANDO O CASSANDRA***
+  -crie a tabela:
+  
+          CREATE TABLE hotel_status.quartos_status (
+            numero_quarto int PRIMARY KEY,
+            data date,
+            hora_atualizacao time,
+            status text
+        ) WITH additional_write_policy = '99p'
+            AND allow_auto_snapshot = true
+            AND bloom_filter_fp_chance = 0.01
+            AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+            AND cdc = false
+            AND comment = ''
+            AND extensions = {}    AND gc_grace_seconds = 864000
+            AND incremental_backups = true
+            AND max_index_interval = 2048
+            AND memtable_flush_period_in_ms = 0
+            AND min_index_interval = 128
+            AND read_repair = 'BLOCKING'
+            AND speculative_retry = '99p';
+
+Insira os seguintes dados:
+
+        INSERT INTO hotel_status.quartos_status_v2 (numero_quarto, data, hora_atualizacao, status)
+        VALUES (110, '2025-11-06', '23:13:47.000000000', 'livre');
+        
+        INSERT INTO hotel_status.quartos_status_v2 (numero_quarto, data, hora_atualizacao, status)
+        VALUES (310, '2025-11-10', '22:41:11.000000000', 'livre');
+        
+        INSERT INTO hotel_status.quartos_status_v2 (numero_quarto, data, hora_atualizacao, status)
+        VALUES (120, '2025-11-10', '22:39:51.000000000', 'livre');
+        
+        INSERT INTO hotel_status.quartos_status_v2 (numero_quarto, data, hora_atualizacao, status)
+        VALUES (320, '2025-11-10', '23:43:47.000000000', 'livre');
+        
+        INSERT INTO hotel_status.quartos_status_v2 (numero_quarto, data, hora_atualizacao, status)
+        VALUES (210, '2025-11-10', '23:44:54.000000000', 'ocupado');
+        
+        INSERT INTO hotel_status.quartos_status_v2 (numero_quarto, data, hora_atualizacao, status)
+        VALUES (130, '2025-11-10', '23:51:53.000000000', 'ocupado');
+        
+        INSERT INTO hotel_status.quartos_status_v2 (numero_quarto, data, hora_atualizacao, status)
+        VALUES (220, '2025-11-11', '14:31:29.000000000', 'ocupado');
+
+Caso seja necessário, altere esta parte do código para executar:
+        
+        const clientCass = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1', keyspace: 'hotel_status', });
+
+
 ### ***COMO RODAR O PROJETO***
 
 **Antes de tudo é necessário navegar até a pasta 'project'.**
